@@ -11,13 +11,24 @@ config_version=5
 [application]
 
 config/name="Interactive Space Tour"
+run/main_scene="res://scenes/MarsLanding.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://Global.gd"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Facility"
+2d_physics/layer_3="Terrain"
 
 [rendering]
 

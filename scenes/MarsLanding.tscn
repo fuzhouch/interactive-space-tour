@@ -1,0 +1,127 @@
+[gd_scene load_steps=9 format=3 uid="uid://4v488irwrfc8"]
+
+[ext_resource type="Texture2D" uid="uid://desl57v3y7was" path="res://assets/tilesheet-mars-landing-16x16-64x64-0001.png" id="1_46mla"]
+[ext_resource type="Texture2D" uid="uid://bt3vfv30ib1km" path="res://assets/mars-landing-background-320x192-1280x768-0001.png" id="1_c26eo"]
+[ext_resource type="Script" path="res://scenes/MarsLanding.gd" id="1_cbr5t"]
+[ext_resource type="PackedScene" uid="uid://cccvyqwq6cyd2" path="res://characters/Player.tscn" id="2_686la"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f7b3q"]
+texture = ExtResource("1_46mla")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+3:0/0 = 0
+3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:0/0/physics_layer_0/angular_velocity = 0.0
+4:0/0 = 0
+4:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+4:0/0/physics_layer_0/angular_velocity = 0.0
+4:1/0 = 0
+4:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+4:1/0/physics_layer_0/angular_velocity = 0.0
+3:1/0 = 0
+3:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:1/0/physics_layer_0/angular_velocity = 0.0
+2:1/0 = 0
+2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+0:2/0 = 0
+0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:2/0/physics_layer_0/angular_velocity = 0.0
+1:2/0 = 0
+1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:2/0/physics_layer_0/angular_velocity = 0.0
+2:2/0 = 0
+2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:2/0/physics_layer_0/angular_velocity = 0.0
+3:2/0 = 0
+3:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:2/0/physics_layer_0/angular_velocity = 0.0
+0:3/0 = 0
+0:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:3/0/physics_layer_0/angular_velocity = 0.0
+1:3/0 = 0
+1:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:3/0/physics_layer_0/angular_velocity = 0.0
+2:3/0 = 0
+2:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:3/0/physics_layer_0/angular_velocity = 0.0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+3:3/0 = 0
+3:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:3/0/physics_layer_0/angular_velocity = 0.0
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
+[sub_resource type="TileSet" id="TileSet_wn7xn"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 4
+physics_layer_0/collision_mask = 0
+sources/0 = SubResource("TileSetAtlasSource_f7b3q")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ir83"]
+size = Vector2(64, 768)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c0p05"]
+size = Vector2(64, 768)
+
+[node name="MarsLanding" type="Node2D"]
+script = ExtResource("1_cbr5t")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1280, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("1_c26eo")
+centered = false
+
+[node name="Terrain" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_wn7xn")
+format = 2
+layer_0/name = "background"
+layer_0/tile_data = PackedInt32Array(655360, 196608, 3, 655361, 196608, 3, 655362, 196608, 3, 655363, 196608, 3, 655364, 196608, 3, 655365, 196608, 3, 655366, 196608, 3, 655367, 196608, 3, 655368, 196608, 3, 655369, 196608, 3, 655370, 196608, 3, 655371, 196608, 3, 655372, 196608, 3, 655373, 196608, 3, 655374, 196608, 3, 655375, 196608, 3, 655376, 196608, 3, 655377, 196608, 3, 655378, 196608, 3, 655379, 196608, 3, 720896, 131072, 3, 720897, 131072, 3, 720898, 131072, 3, 720899, 131072, 3, 720900, 131072, 3, 720901, 131072, 3, 720902, 131072, 3, 720903, 131072, 3, 720904, 131072, 3, 720905, 131072, 3, 720906, 131072, 3, 720907, 131072, 3, 720908, 131072, 3, 720909, 131072, 3, 720910, 131072, 3, 720911, 131072, 3, 720912, 131072, 3, 720913, 131072, 3, 720914, 131072, 3, 720915, 131072, 3, 655380, 196608, 3, 655381, 196608, 3, 655382, 196608, 3, 655383, 196608, 3, 655384, 196608, 3, 655385, 196608, 3, 655386, 196608, 3, 655387, 196608, 3, 655388, 196608, 3, 655389, 196608, 3, 655390, 196608, 3, 655391, 196608, 3, 655392, 196608, 3, 720928, 131072, 3, 720929, 131072, 3, 720930, 131072, 3, 720931, 131072, 3, 720932, 131072, 3, 720933, 131072, 3, 720934, 131072, 3, 655398, 196608, 3, 655399, 196608, 3, 655397, 196608, 3, 655396, 196608, 3, 655395, 196608, 3, 655394, 196608, 3, 655393, 196608, 3, 720916, 131072, 3, 720917, 131072, 3, 720918, 131072, 3, 720919, 131072, 3, 720920, 131072, 3, 720921, 131072, 3, 720922, 131072, 3, 720923, 131072, 3, 720924, 131072, 3, 720925, 131072, 3, 720926, 131072, 3, 720927, 131072, 3, 720935, 131072, 3)
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="LeftWall" type="StaticBody2D" parent="Walls"]
+position = Vector2(-32, 0)
+collision_layer = 4
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall"]
+position = Vector2(0, 384)
+shape = SubResource("RectangleShape2D_0ir83")
+
+[node name="RightWall" type="StaticBody2D" parent="Walls"]
+position = Vector2(2592, 384)
+collision_layer = 4
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall"]
+shape = SubResource("RectangleShape2D_c0p05")
+
+[node name="Player" parent="." instance=ExtResource("2_686la")]
+position = Vector2(128, 576)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+limit_left = 0
+limit_top = 0
+limit_right = 2560
+limit_bottom = 720
+position_smoothing_enabled = true
+editor_draw_limits = true
+editor_draw_drag_margin = true
