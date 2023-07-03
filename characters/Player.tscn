@@ -263,6 +263,7 @@ autostart = true
 [connection signal="env_gravity_changed" from="." to="." method="_on_env_gravity_changed"]
 [connection signal="env_radiation_changed" from="." to="." method="_on_env_radiation_changed"]
 [connection signal="health_changed" from="." to="." method="_on_health_changed"]
+[connection signal="monitor_connected" from="." to="." method="_on_monitor_connected"]
 [connection signal="strength_changed" from="." to="." method="_on_strength_changed"]
 [connection signal="suite_changed" from="." to="." method="_on_suite_changed"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

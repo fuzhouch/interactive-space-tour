@@ -40,6 +40,9 @@ var action_animation: Array = [
 # =====================================================================
 # Character interaction
 # =====================================================================
+var monitor: CanvasLayer = null
+signal monitor_connected(monitor_hud)
+
 signal health_changed(health_point_delta)
 signal strength_changed(strength_delta)
 signal suite_changed(suite_on)
@@ -57,9 +60,6 @@ func _is_right(direction: float) -> bool:
 func _adjust_walk_speed() -> void:
     # Character's strenth decides how fast our player can move
     velocity.x = velocity.x * (strength / 100.0)
-
-func _adjust_health_by_env() -> void:
-    pass
 
 func _check_health() -> void:
     if health <= 0:
@@ -114,12 +114,19 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 
 func _on_health_check_timer_timeout() -> void:
     var health_lost: int = 0
-    if radiation - radiation_protection >= RADIATION_SAFE_LINE:
+    var radiation_effective: int = radiation - radiation_protection
+    if radiation_effective >= RADIATION_SAFE_LINE:
         health_lost += 10
     if starving:
         health_lost += 1
     if health_lost > 0:
         self.emit_signal("health_changed", -health_lost)
+
+    if monitor != null:
+        monitor.emit_signal("strength_updated", strength)
+        monitor.emit_signal("health_updated", health)
+        monitor.emit_signal("radiation_env_updated", radiation)
+        monitor.emit_signal("radiation_to_human_updated", radiation_effective)
 
 func _on_health_changed(health_point_delta: int) -> void:
     health += health_point_delta
@@ -145,3 +152,8 @@ func _on_env_radiation_changed(new_radiation_value: int) -> void:
 
 func _on_env_gravity_changed(new_gravity_value: int) -> void:
     gravity = new_gravity_value
+
+
+func _on_monitor_connected(monitor_hud: CanvasLayer) -> void:
+    monitor = monitor_hud
+    monitor.emit_signal("player_connected", self)

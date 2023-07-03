@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://4v488irwrfc8"]
+[gd_scene load_steps=10 format=3 uid="uid://4v488irwrfc8"]
 
 [ext_resource type="Texture2D" uid="uid://desl57v3y7was" path="res://assets/tilesheet-mars-landing-16x16-64x64-0001.png" id="1_46mla"]
 [ext_resource type="Texture2D" uid="uid://bt3vfv30ib1km" path="res://assets/mars-landing-background-320x192-1280x768-0001.png" id="1_c26eo"]
 [ext_resource type="Script" path="res://scenes/MarsLanding.gd" id="1_cbr5t"]
 [ext_resource type="PackedScene" uid="uid://cccvyqwq6cyd2" path="res://characters/Player.tscn" id="2_686la"]
+[ext_resource type="PackedScene" uid="uid://dkysisgefkyh2" path="res://ui/HUD_HealthMonitor.tscn" id="5_wwgeq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f7b3q"]
 texture = ExtResource("1_46mla")
@@ -125,3 +126,7 @@ limit_bottom = 720
 position_smoothing_enabled = true
 editor_draw_limits = true
 editor_draw_drag_margin = true
+
+[node name="HUD_HealthMonitor" parent="." instance=ExtResource("5_wwgeq")]
+offset = Vector2(10, 10)
+transform = Transform2D(1, 0, 0, 1, 10, 10)

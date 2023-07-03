@@ -5,4 +5,6 @@ extends Node2D
 func _ready() -> void:
     $Player.emit_signal("env_radiation_changed", Global.RADIATION_MARS)
     $Player.emit_signal("env_gravity_changed", Global.GRAVITY_MARS)
-    $Player.emit_signal("strength_changed", -50)
+    $Player.emit_signal("health_changed", -22)
+    $Player.emit_signal("strength_changed", -35)
+    $Player.emit_signal("monitor_connected", $HUD_HealthMonitor)

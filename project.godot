@@ -24,11 +24,16 @@ Global="*res://Global.gd"
 window/size/viewport_width=1280
 window/size/viewport_height=720
 
+[editor]
+
+movie_writer/movie_file="/home/fuzhouch/projects/gaming/godot/interactive-space-tour/cam_material.avi"
+
 [layer_names]
 
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Facility"
 2d_physics/layer_3="Terrain"
+2d_physics/layer_4="Clickable"
 
 [rendering]
 

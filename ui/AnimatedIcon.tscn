@@ -1,0 +1,100 @@
+[gd_scene load_steps=12 format=3 uid="uid://djecdx117hwyx"]
+
+[ext_resource type="Texture2D" uid="uid://br7wuosvum5e1" path="res://assets/ui-hud-icon-16x16-64x64-0001.png" id="1_apdfw"]
+[ext_resource type="Script" path="res://ui/AnimatedIcon.gd" id="2_8jgwl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aow0d"]
+atlas = ExtResource("1_apdfw")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2x7np"]
+atlas = ExtResource("1_apdfw")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ecoeq"]
+atlas = ExtResource("1_apdfw")
+region = Rect2(0, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jvyxg"]
+atlas = ExtResource("1_apdfw")
+region = Rect2(64, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_837sl"]
+atlas = ExtResource("1_apdfw")
+region = Rect2(0, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_41hrn"]
+atlas = ExtResource("1_apdfw")
+region = Rect2(64, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vrela"]
+atlas = ExtResource("1_apdfw")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gp2bs"]
+atlas = ExtResource("1_apdfw")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vqee5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aow0d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2x7np")
+}],
+"loop": true,
+"name": &"health",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ecoeq")
+}],
+"loop": true,
+"name": &"radiation",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jvyxg")
+}],
+"loop": true,
+"name": &"radiation_effective",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_837sl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_41hrn")
+}],
+"loop": true,
+"name": &"strength",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vrela")
+}],
+"loop": true,
+"name": &"suite_off",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gp2bs")
+}],
+"loop": true,
+"name": &"suite_on",
+"speed": 5.0
+}]
+
+[node name="AnimatedIcon" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_vqee5")
+animation = &"suite_off"
+script = ExtResource("2_8jgwl")
+
+[connection signal="icon_changed" from="." to="." method="_on_icon_changed"]

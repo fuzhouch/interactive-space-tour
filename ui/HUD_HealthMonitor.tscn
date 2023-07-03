@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkysisgefkyh2"]
+
+[ext_resource type="PackedScene" uid="uid://kdm53s1vma58" path="res://ui/AnimatedGauge.tscn" id="1_62cvm"]
+[ext_resource type="Script" path="res://ui/HUD_HealthMonitor.gd" id="1_cumbx"]
+[ext_resource type="PackedScene" uid="uid://djecdx117hwyx" path="res://ui/AnimatedIcon.tscn" id="3_istp4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_moa48"]
+size = Vector2(64, 64)
+
+[node name="HUD_HealthMonitor" type="CanvasLayer"]
+script = ExtResource("1_cumbx")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 522.0
+offset_bottom = 240.0
+
+[node name="Gauge_Health" parent="Panel" instance=ExtResource("1_62cvm")]
+position = Vector2(192, 64)
+
+[node name="Gauge_Strength" parent="Panel" instance=ExtResource("1_62cvm")]
+position = Vector2(448, 64)
+
+[node name="Gauge_Radiation_Env" parent="Panel" instance=ExtResource("1_62cvm")]
+position = Vector2(192, 160)
+
+[node name="Gauge_Radiation_ToHuman" parent="Panel" instance=ExtResource("1_62cvm")]
+position = Vector2(448, 160)
+reverse_display = true
+
+[node name="Icon_Health" parent="Panel" instance=ExtResource("3_istp4")]
+position = Vector2(64, 64)
+animation_icon_name = "health"
+
+[node name="Icon_Strength" parent="Panel" instance=ExtResource("3_istp4")]
+position = Vector2(320, 64)
+animation_icon_name = "strength"
+
+[node name="Icon_Radiation" parent="Panel" instance=ExtResource("3_istp4")]
+position = Vector2(64, 160)
+animation_icon_name = "radiation"
+
+[node name="Icon_RadiationToHuman" parent="Panel" instance=ExtResource("3_istp4")]
+position = Vector2(320, 160)
+animation_icon_name = "radiation_effective"
+
+[node name="Icon_Suite" parent="Panel" instance=ExtResource("3_istp4")]
+position = Vector2(576, 64)
+
+[node name="UserInput_SuiteOff" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UserInput_SuiteOff"]
+position = Vector2(576, 64)
+shape = SubResource("RectangleShape2D_moa48")
+
+[connection signal="health_updated" from="." to="." method="_on_health_updated"]
+[connection signal="player_connected" from="." to="." method="_on_player_connected"]
+[connection signal="radiation_env_updated" from="." to="." method="_on_radiation_env_updated"]
+[connection signal="radiation_to_human_updated" from="." to="." method="_on_radiation_to_human_updated"]
+[connection signal="strength_updated" from="." to="." method="_on_strength_updated"]
+[connection signal="input_event" from="UserInput_SuiteOff" to="." method="_on_user_input_suite_off_input_event"]
