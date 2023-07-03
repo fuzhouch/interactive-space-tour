@@ -1,10 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://4v488irwrfc8"]
+[gd_scene load_steps=13 format=3 uid="uid://4v488irwrfc8"]
 
 [ext_resource type="Texture2D" uid="uid://desl57v3y7was" path="res://assets/tilesheet-mars-landing-16x16-64x64-0001.png" id="1_46mla"]
 [ext_resource type="Texture2D" uid="uid://bt3vfv30ib1km" path="res://assets/mars-landing-background-320x192-1280x768-0001.png" id="1_c26eo"]
 [ext_resource type="Script" path="res://scenes/MarsLanding.gd" id="1_cbr5t"]
 [ext_resource type="PackedScene" uid="uid://cccvyqwq6cyd2" path="res://characters/Player.tscn" id="2_686la"]
+[ext_resource type="Texture2D" uid="uid://w7jiglpwcl6n" path="res://assets/mars-spaceship-background-160x96-640x192-0001.png" id="3_1rbuk"]
+[ext_resource type="Texture2D" uid="uid://d08bnw3wqh4vw" path="res://assets/mars-landing-base-160x192-640x768-0001.png" id="4_41bnq"]
 [ext_resource type="PackedScene" uid="uid://dkysisgefkyh2" path="res://ui/HUD_HealthMonitor.tscn" id="5_wwgeq"]
+[ext_resource type="PackedScene" uid="uid://dh5rd1apk1c70" path="res://scenes/Door.tscn" id="6_58aq8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f7b3q"]
 texture = ExtResource("1_46mla")
@@ -83,11 +86,26 @@ script = ExtResource("1_cbr5t")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="Remote" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.1, 1)
 motion_mirroring = Vector2(1280, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+[node name="Mars" type="Sprite2D" parent="ParallaxBackground/Remote"]
 texture = ExtResource("1_c26eo")
+centered = false
+
+[node name="Middle" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Spaceship" type="Sprite2D" parent="ParallaxBackground/Middle"]
+position = Vector2(0, 256)
+texture = ExtResource("3_1rbuk")
+centered = false
+
+[node name="Near" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Base" type="Sprite2D" parent="ParallaxBackground/Near"]
+position = Vector2(1408, -128)
+texture = ExtResource("4_41bnq")
 centered = false
 
 [node name="Terrain" type="TileMap" parent="."]
@@ -108,20 +126,23 @@ position = Vector2(0, 384)
 shape = SubResource("RectangleShape2D_0ir83")
 
 [node name="RightWall" type="StaticBody2D" parent="Walls"]
-position = Vector2(2592, 384)
+position = Vector2(2080, 384)
 collision_layer = 4
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall"]
 shape = SubResource("RectangleShape2D_c0p05")
 
+[node name="Door" parent="." instance=ExtResource("6_58aq8")]
+position = Vector2(1728, 544)
+
 [node name="Player" parent="." instance=ExtResource("2_686la")]
-position = Vector2(128, 576)
+position = Vector2(224, 512)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 limit_left = 0
 limit_top = 0
-limit_right = 2560
+limit_right = 2048
 limit_bottom = 720
 position_smoothing_enabled = true
 editor_draw_limits = true

@@ -255,11 +255,13 @@ shape = SubResource("RectangleShape2D_5oqt0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_h5o2d")
-animation = &"die"
+animation = &"nosuite_die"
 
 [node name="HealthCheckTimer" type="Timer" parent="."]
 autostart = true
 
+[connection signal="door_area_entered" from="." to="." method="_on_door_area_entered"]
+[connection signal="door_area_exited" from="." to="." method="_on_door_area_exited"]
 [connection signal="env_gravity_changed" from="." to="." method="_on_env_gravity_changed"]
 [connection signal="env_radiation_changed" from="." to="." method="_on_env_radiation_changed"]
 [connection signal="health_changed" from="." to="." method="_on_health_changed"]

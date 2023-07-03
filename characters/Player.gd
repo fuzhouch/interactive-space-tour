@@ -43,11 +43,16 @@ var action_animation: Array = [
 var monitor: CanvasLayer = null
 signal monitor_connected(monitor_hud)
 
+var door: Node2D = null
+signal door_area_entered(door)
+signal door_area_exited(door)
+
 signal health_changed(health_point_delta)
 signal strength_changed(strength_delta)
 signal suite_changed(suite_on)
 signal env_radiation_changed(new_radiation_value)
 signal env_gravity_changed(new_gravity_value)
+
 # =====================================================================
 # Action processors
 # =====================================================================
@@ -71,7 +76,6 @@ func _check_health() -> void:
         $HealthCheckTimer.stop()
 
 func _physics_process(delta: float) -> void:
-
     var direction = Input.get_axis("ui_left", "ui_right")
     if direction:
         velocity.x = direction * speed
@@ -96,6 +100,9 @@ func _physics_process(delta: float) -> void:
     # Let's leave ui_accept (space) for interaction.
     if Input.is_action_just_pressed("ui_up") and is_on_floor():
         velocity.y = jump_velocity
+        
+    if Input.is_action_just_pressed("ui_accept") and door != null:
+        door.emit_signal("door_open_requested", self)
 
     _adjust_walk_speed()
     _check_health()
@@ -107,6 +114,7 @@ func _physics_process(delta: float) -> void:
 func _on_animated_sprite_2d_animation_finished() -> void:
     if action_status == STATUS_DIE or action_status == STATUS_NOSUITE_DIE:
         queue_free()
+        get_tree().reload_current_scene()
 
 # =====================================================================
 # Response to in-scene interaction
@@ -157,3 +165,12 @@ func _on_env_gravity_changed(new_gravity_value: int) -> void:
 func _on_monitor_connected(monitor_hud: CanvasLayer) -> void:
     monitor = monitor_hud
     monitor.emit_signal("player_connected", self)
+
+
+func _on_door_area_entered(door) -> void:
+    self.door = door
+
+
+func _on_door_area_exited(door) -> void:
+    if self.door == door:
+        self.door = null

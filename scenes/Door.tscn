@@ -1,0 +1,156 @@
+[gd_scene load_steps=20 format=3 uid="uid://dh5rd1apk1c70"]
+
+[ext_resource type="Script" path="res://scenes/Door.gd" id="1_0y4xf"]
+[ext_resource type="Texture2D" uid="uid://bqfarw06lxolk" path="res://assets/mars-landing-base-door-48x48-192x192-0001.png" id="1_yxkpo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bec1p"]
+size = Vector2(128, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d8gi3"]
+atlas = ExtResource("1_yxkpo")
+region = Rect2(768, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1k7t2"]
+atlas = ExtResource("1_yxkpo")
+region = Rect2(576, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_moyp4"]
+atlas = ExtResource("1_yxkpo")
+region = Rect2(384, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0uwux"]
+atlas = ExtResource("1_yxkpo")
+region = Rect2(192, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tdohv"]
+atlas = ExtResource("1_yxkpo")
+region = Rect2(0, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2gdw"]
+atlas = ExtResource("1_yxkpo")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i1j0r"]
+atlas = ExtResource("1_yxkpo")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_syrwe"]
+atlas = ExtResource("1_yxkpo")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_usac8"]
+atlas = ExtResource("1_yxkpo")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ytfxr"]
+atlas = ExtResource("1_yxkpo")
+region = Rect2(0, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kkyyy"]
+atlas = ExtResource("1_yxkpo")
+region = Rect2(192, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_igufs"]
+atlas = ExtResource("1_yxkpo")
+region = Rect2(384, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oyse0"]
+atlas = ExtResource("1_yxkpo")
+region = Rect2(576, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cgv4x"]
+atlas = ExtResource("1_yxkpo")
+region = Rect2(768, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45k1h"]
+atlas = ExtResource("1_yxkpo")
+region = Rect2(768, 192, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bwlq3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d8gi3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1k7t2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_moyp4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0uwux")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tdohv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a2gdw")
+}],
+"loop": false,
+"name": &"close",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i1j0r")
+}],
+"loop": true,
+"name": &"detected",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_syrwe")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_usac8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ytfxr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kkyyy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igufs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oyse0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cgv4x")
+}],
+"loop": false,
+"name": &"open",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45k1h")
+}],
+"loop": true,
+"name": &"welcome",
+"speed": 5.0
+}]
+
+[node name="Door" type="Area2D"]
+collision_layer = 8
+script = ExtResource("1_0y4xf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bec1p")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_bwlq3")
+animation = &"welcome"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="door_open_requested" from="." to="." method="_on_door_open_requested"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
