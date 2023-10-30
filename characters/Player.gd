@@ -81,12 +81,14 @@ func _physics_process(delta: float) -> void:
     
     var direction: float = 0.0
     if move_left:
+        print("move left")
         direction = -1.0
         if is_suite_on:
             action_status = STATUS_WALK
         else:
             action_status = STATUS_NOSUITE_WALK
     elif move_right:
+        print("move right")
         direction = 1.0
         if is_suite_on:
             action_status = STATUS_WALK
